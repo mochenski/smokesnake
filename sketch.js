@@ -1,6 +1,6 @@
-const MAX_CANVAS_WIDTH = 500
+const MAX_CANVAS_WIDTH = 800
 const MAX_CANVAS_HEIGHT = MAX_CANVAS_WIDTH
-const MAX_NUMBER_OF_CELLS = 3
+const MAX_NUMBER_OF_CELLS = 15
 
 const CELL_SIZE = (MAX_CANVAS_WIDTH / MAX_NUMBER_OF_CELLS)
 const ARRAY_TO_SELECT_RANDOM_CELL = [...Array(MAX_NUMBER_OF_CELLS).keys()]
@@ -83,10 +83,10 @@ function createSnake() {
     ArrowRight: function() { if(this.moved) {this.currentDirection = (this.currentDirection == this.Left? this.Left :this.Right); this.moved = false}},
     ArrowLeft: function() { if(this.moved) {this.currentDirection = (this.currentDirection == this.Right? this.Right :this.Left); this.moved = false}},
     
-    Up: function() { if(!this.isNextStepAllowed(this.body[0].x,this.body[0].y-1)) return; this.body.unshift({x:this.body[0].x ,y: this.body[0].y-1, food: false}); this.body.pop(); this.moved && (this.currentDirection = (this.Up)); this.draw()},
-    Down: function() { if(!this.isNextStepAllowed(this.body[0].x,this.body[0].y+1)) return; this.body.unshift({x:this.body[0].x ,y: this.body[0].y+1, food: false}); this.body.pop(); this.moved && (this.currentDirection = (this.Down)); this.draw()},
-    Right: function() { if(!this.isNextStepAllowed(this.body[0].x+1,this.body[0].y)) return; this.body.unshift({x:this.body[0].x+1 ,y: this.body[0].y, food: false}); this.body.pop(); this.moved && (this.currentDirection = (this.Right)); this.draw()},
-    Left: function () { if(!this.isNextStepAllowed(this.body[0].x - 1,this.body[0].y)) return; this.body.unshift({ x: this.body[0].x - 1, y: this.body[0].y, food: false}); this.body.pop(); this.moved && (this.currentDirection = (this.Left)); this.draw()},
+    Up: function() { if(!this.isNextStepAllowed(this.body[0].x,this.body[0].y-1)) end(); this.body.unshift({x:this.body[0].x ,y: this.body[0].y-1, food: false}); this.body.pop(); this.moved && (this.currentDirection = (this.Up)); this.draw()},
+    Down: function() { if(!this.isNextStepAllowed(this.body[0].x,this.body[0].y+1)) end(); this.body.unshift({x:this.body[0].x ,y: this.body[0].y+1, food: false}); this.body.pop(); this.moved && (this.currentDirection = (this.Down)); this.draw()},
+    Right: function() { if(!this.isNextStepAllowed(this.body[0].x+1,this.body[0].y)) end(); this.body.unshift({x:this.body[0].x+1 ,y: this.body[0].y, food: false}); this.body.pop(); this.moved && (this.currentDirection = (this.Right)); this.draw()},
+    Left: function () { if(!this.isNextStepAllowed(this.body[0].x - 1,this.body[0].y)) end(); this.body.unshift({ x: this.body[0].x - 1, y: this.body[0].y, food: false}); this.body.pop(); this.moved && (this.currentDirection = (this.Left)); this.draw()},
     currentDirection: function () { this.Right() },
 
     isNextStepAllowed: function(x, y) { return (x>=0 && y>=0) && (x<MAX_NUMBER_OF_CELLS && y<MAX_NUMBER_OF_CELLS)},
